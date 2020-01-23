@@ -1,5 +1,5 @@
 import requests
-from requests.exceptions import MissingSchema
+from requests.exceptions import MissingSchema, InvalidSchema
 
 
 def create_world_bank_api_url_string(country_code, indicator_code, output_format="json"):
@@ -35,5 +35,5 @@ def retrieve_url_content(url):
     assert isinstance(url, str), "url must be a string"
     try:
         return requests.get(url).content
-    except MissingSchema:
-        raise MissingSchema('Incorrect URL used')
+    except (InvalidSchema, MissingSchema):
+        raise MissingSchema('Incorrect URL used, make sure url starts with http or https')
