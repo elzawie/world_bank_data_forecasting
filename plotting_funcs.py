@@ -1,5 +1,7 @@
 from pandas import DataFrame
 import plotly.express as px
+from plotly.offline import plot
+from plotly.graph_objs._figure import Figure
 
 
 def plot_historical_and_forecasted_values(dataframe, x, y, color_by_col,
@@ -31,3 +33,23 @@ def plot_historical_and_forecasted_values(dataframe, x, y, color_by_col,
                       xaxis_title='Year',
                       yaxis_title=indicator_name)
     fig.show()
+    return fig
+
+
+def save_plot_to_html(filename, fig, width, height):
+    """Function used to save plotly figure object to interactive HTML file
+
+    Arguments:
+        filename{[str]} -- string representing plot filename
+        fig {[plotly.graph_objs._figure.Figure]} - Plotly Figure object
+        width {[int]} -- plot width
+        height {[int]} -- plot height,
+    """
+    assert isinstance(filename, str), "filename must be a string"
+    assert isinstance(fig, Figure), "fig must be an instance of plotly.graph_objs._figure.Figure"
+    assert isinstance(width, int), "width must be an integer"
+    assert isinstance(height, int), "height must be an integer"
+    fig.update_layout(width=width, height=height)
+    plot(fig,
+         filename=f'{filename}.html',
+         auto_open=False)
