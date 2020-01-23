@@ -28,5 +28,5 @@ def extract_dates_and_values_from_json(json_data):
         values = [observation['value'] for observation in metadata]
         return indicator_name, dates, values
     except IndexError:
-        message = json_data[0]['message'][0]['value']
-        raise Exception(f'{message}. Please make sure that country and indicator codes are correct')
+        msg = json_data[0]['message'][0]['value']
+        raise IndexError(f'{msg}. Please make sure that country and indicator codes are correct')
