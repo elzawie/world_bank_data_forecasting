@@ -1,3 +1,4 @@
+from pandas import DataFrame
 import plotly.express as px
 
 
@@ -12,6 +13,13 @@ def plot_historical_and_forecasted_values(dataframe, x, y, color_by_col,
         y {[str]} -- column which values should be displayed on the y-axis
         color_by_col {[str]} -- column which should be used to color the lines and markers
     """
+    assert isinstance(dataframe, DataFrame), "dataframe must be an instance of DataFrame class"
+    assert isinstance(x, str), "x must be a string"
+    assert isinstance(y, str), "y must be a string"
+    assert isinstance(color_by_col, str), "color_by_col must be a string"
+    assert isinstance(indicator_code, str), "indicator_code must be a string"
+    assert isinstance(indicator_name, str), "indicator_name must be a string"
+    assert isinstance(country, str), "country must be a string"
 
     fig = px.line(dataframe, x=x, y=y,
                   color=color_by_col,
