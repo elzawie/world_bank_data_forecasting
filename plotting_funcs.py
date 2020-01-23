@@ -2,7 +2,7 @@ import plotly.express as px
 
 
 def plot_historical_and_forecasted_values(dataframe, x, y, color_by_col,
-                                          indicator_code, country):
+                                          indicator_code, indicator_name, country):
     """Function used to plot historical and forecasted values represented as
     lines with markers.
 
@@ -21,5 +21,5 @@ def plot_historical_and_forecasted_values(dataframe, x, y, color_by_col,
     fig.data[1].update(mode='markers+lines')
     fig.update_layout(title=f'Historical and forecasted values for {indicator_code} in {country}',
                       xaxis_title='Year',
-                      yaxis_title='Value')
+                      yaxis_title=indicator_name)
     fig.show()

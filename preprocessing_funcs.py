@@ -15,8 +15,8 @@ def convert_bytes_to_unicode(bytes_object):
 
 
 def extract_dates_and_values_from_json(json_data):
-    """Function used to extract dates and values from the JSON returned
-    by the World Bank API
+    """Function used to extract indicator name, dates and values from the JSON
+    returned by the World Bank API
 
     Arguments:
         json_data {[list]} -- json array returned by the World Bank API
@@ -24,7 +24,8 @@ def extract_dates_and_values_from_json(json_data):
     assert isinstance(json_data, list), "json_data must be a list"
 
     _, metadata = json_data[0], json_data[1]
+    indicator_name = [observation['indicator']['value'] for observation in metadata[0:1]].pop()
     dates = [observation['date'] for observation in metadata]
     values = [observation['value'] for observation in metadata]
 
-    return dates, values
+    return indicator_name, dates, values
